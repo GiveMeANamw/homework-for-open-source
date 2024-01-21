@@ -26,12 +26,6 @@ for page in detail_urls:
             if url[-3:] == 'jpg':
                 with open('./train/dog/保存的地址{}.jpg'.format(b), 'wb') as f:
                     f.write(content)
-            # elif url[-4:] == 'jpeg':
-                # with open('./train/dog/保存的地址{}.jpeg'.format(b), 'wb') as f:
-                #     f.write(content)
-            # elif url[-3:] == 'png':
-                # with open('./train/dog/保存的地址{}.pon'.format(b), 'wb') as f:
-                #     f.write(content)
             else:
                 continue
 

@@ -68,7 +68,7 @@ class_names = ['dog','lion',]  # 这个顺序很重要，要和训练时候的�
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # ------------------------ 载入模型并且训练 --------------------------- #
-model = torch.load('model_insects.pth')
+model = torch.load('model_insects0.pth')
 model.eval()
 # print(model)38，49
 
@@ -96,7 +96,7 @@ image_tensor.unsqueeze_(0)
 image_tensor = image_tensor.to(device)
 
 out = model(image_tensor)
-# print(out)
+print(out)
 pred = torch.tensor([[1] if num[0] >= 0.5 else [0] for num in out]).to(device)
 print(class_names[pred])
 

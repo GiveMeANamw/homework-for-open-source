@@ -33,8 +33,9 @@ transform = transforms.Compose([
     transforms.RandomCrop(50),
     transforms.RandomResizedCrop(150),
     transforms.ColorJitter(brightness=0.5, contrast=0.5, hue=0.5),
+    transforms.Grayscale(),
     transforms.ToTensor(),
-    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+    transforms.Normalize([0.5], [0.5])
 ])
 #导入训练数据
 dataset_train = datasets.ImageFolder('.\\train', transform)
@@ -57,7 +58,7 @@ class ConvNet(nn.Module):
     def __init__(self):
         super(ConvNet, self).__init__()
         #卷积层conv，池化层pool
-        self.conv1 = nn.Conv2d(3, 32, 3)
+        self.conv1 = nn.Conv2d(1, 32, 3)
         self.max_pool1 = nn.MaxPool2d(2)
         self.conv2 = nn.Conv2d(32, 64, 3)
         self.max_pool2 = nn.MaxPool2d(2)
