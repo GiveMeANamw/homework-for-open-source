@@ -37,28 +37,20 @@ transform = transforms.Compose([
     transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 ])
 #导入训练数据
-dataset_train = datasets.ImageFolder('D:\\pythonProject\\train', transform)
+dataset_train = datasets.ImageFolder('.\\train', transform)
 
 #导入测试数据
-dataset_test = datasets.ImageFolder('D:\\pythonProject\\test', transform)
+dataset_test = datasets.ImageFolder('.\\test', transform)
 
 test_loader = torch.utils.data.DataLoader(dataset_test, batch_size=BATCH_SIZE, shuffle=True)
 
-# print(dataset_train.imgs)
-# print(dataset_train[0])
-# print(dataset_train.classes)
 classess=dataset_train.classes #标签
 class_to_idxes=dataset_train.class_to_idx #对应关系
 print(class_to_idxes)
-# print(dataset_train.class_to_idx)
+
 
 train_loader = torch.utils.data.DataLoader(dataset_train, batch_size=BATCH_SIZE, shuffle=True)
-# for batch_idx, (data, target) in enumerate(train_loader):
-#     # print(data)
-#     print(target)
-#     data, target = data.to(device), target.to(device).float().unsqueeze(1)
-#     # print(data)
-#     print(target)
+
 
 # 定义网络
 class ConvNet(nn.Module):
