@@ -114,7 +114,7 @@ model = ConvNet().to(device)
 print(model)
 # 选择简单暴力的Adam优化器，学习率调低
 
-optimizer = optim.Adam(model.parameters(), lr=modellr)
+optimizer = optim.AdamW(model.parameters(), lr=modellr)
 #调整学习率
 def adjust_learning_rate(optimizer, epoch):
     """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""
