@@ -33,9 +33,8 @@ transform = transforms.Compose([
     transforms.RandomCrop(50),
     transforms.RandomResizedCrop(150),
     transforms.ColorJitter(brightness=0.5, contrast=0.5, hue=0.5),
-    transforms.Grayscale(),
     transforms.ToTensor(),
-    transforms.Normalize([0.5], [0.5])
+    transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
 ])
 #导入训练数据
 dataset_train = datasets.ImageFolder('.\\train', transform)
@@ -58,11 +57,12 @@ class ConvNet(nn.Module):
     def __init__(self):
         super(ConvNet, self).__init__()
         #卷积层conv，池化层pool
-        self.conv1 = nn.Conv2d(1, 32, 3)
+        self.conv1 = nn.Conv2d(3, 32, 3)
         self.max_pool1 = nn.MaxPool2d(2)
         self.conv2 = nn.Conv2d(32, 64, 3)
         self.max_pool2 = nn.MaxPool2d(2)
         self.conv3 = nn.Conv2d(64, 64, 3)
+        self.max_pool = nn.MaxPool2d(2)
         self.conv4 = nn.Conv2d(64, 64, 3)
         self.max_pool3 = nn.MaxPool2d(2)
         self.conv5 = nn.Conv2d(64, 128, 3)
@@ -73,19 +73,27 @@ class ConvNet(nn.Module):
 
     def forward(self, x):
         in_size = x.size(0)
+
         x = self.conv1(x)
         x = F.relu(x)
         x = self.max_pool1(x)
+
         x = self.conv2(x)
         x = F.relu(x)
         x = self.max_pool2(x)
+
         x = self.conv3(x)
         x = F.relu(x)
+
+
         x = self.conv4(x)
         x = F.relu(x)
-        x = self.max_pool3(x)
+        x = self.max_pool2(x)
+
         x = self.conv5(x)
         x = F.relu(x)
+
+
         x = self.conv6(x)
         x = F.relu(x)
         x = self.max_pool4(x)
@@ -95,6 +103,7 @@ class ConvNet(nn.Module):
         x = F.relu(x)
         x = self.fc2(x)
         x = torch.sigmoid(x)
+        # x =torch.softmax(x)
         return x
 
 modellr = 1e-4
