@@ -8,7 +8,7 @@ headers = {
 detail_urls = []  # 存储图片地址
 
 for i in range(1, 400, 20):  # 20页一张
-    url = 'http://image.baidu.com/search/flip?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=&st=-1&fm=result&fr=&sf=1&fmq=1592804203005_R&pv=&ic=&nc=1&z=&hd=&latest=&copyright=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&ctd=1592804203008%5E00_1328X727&sid=&word=狗&pn={}'.format(
+    url = 'http://image.baidu.com/search/flip?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=&st=-1&fm=result&fr=&sf=1&fmq=1592804203005_R&pv=&ic=&nc=1&z=&hd=&latest=&copyright=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&ctd=1592804203008%5E00_1328X727&sid=&word=瓢虫&pn={}'.format(
         i)  # 请求的地址
     response = requests.get(url, headers, timeout=(3, 7))  # 设置请求超时时间3-7秒
     content = response.content.decode('utf-8')  # 使用utf-8进行解码
@@ -24,7 +24,7 @@ for page in detail_urls:
             response = requests.get(url, headers=headers)
             content = response.content
             if url[-3:] == 'jpg':
-                with open('./train/dog/保存的地址{}.jpg'.format(b), 'wb') as f:
+                with open('./train_insects/瓢虫/{}.jpg'.format(b), 'wb') as f:
                     f.write(content)
             else:
                 continue

@@ -63,7 +63,7 @@ class ConvNet(nn.Module):
 # 数据预处理
 
 
-class_names = ['dog','lion',]  # 这个顺序很重要，要和训练时候的类名顺序一致
+class_names = ['瓢虫','螳螂',]  # 这个顺序很重要，要和训练时候的类名顺序一致
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -85,8 +85,9 @@ transform_test = transforms.Compose([
     transforms.RandomCrop(50),
     transforms.RandomResizedCrop(150),
     transforms.ColorJitter(brightness=0.5, contrast=0.5, hue=0.5),
+
     transforms.ToTensor(),
-    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+    transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
     ])
 
 image_tensor = transform_test(image_PIL)
@@ -96,7 +97,7 @@ image_tensor.unsqueeze_(0)
 image_tensor = image_tensor.to(device)
 
 out = model(image_tensor)
-print(out)
+# print(out)
 pred = torch.tensor([[1] if num[0] >= 0.5 else [0] for num in out]).to(device)
 print(class_names[pred])
 

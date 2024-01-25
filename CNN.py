@@ -71,36 +71,37 @@ class ConvNet(nn.Module):
         self.fc1 = nn.Linear(4608, 512)
         self.fc2 = nn.Linear(512, 1)
 
+    # rrelu 65%
     def forward(self, x):
         in_size = x.size(0)
 
         x = self.conv1(x)
-        x = F.relu(x)
+        x=F.relu(x)
         x = self.max_pool1(x)
-
+        x=F.relu(x)
         x = self.conv2(x)
-        x = F.relu(x)
+        x=F.relu(x)
         x = self.max_pool2(x)
 
         x = self.conv3(x)
-        x = F.relu(x)
+        x=F.relu(x)
 
 
         x = self.conv4(x)
-        x = F.relu(x)
+        x=F.relu(x)
         x = self.max_pool2(x)
 
         x = self.conv5(x)
-        x = F.relu(x)
+        x=F.relu(x)
 
 
         x = self.conv6(x)
-        x = F.relu(x)
+        x=F.relu(x)
         x = self.max_pool4(x)
         # 展开
         x = x.view(in_size, -1)
         x = self.fc1(x)
-        x = F.relu(x)
+        x=F.relu(x)
         x = self.fc2(x)
         x = torch.sigmoid(x)
         # x =torch.softmax(x)
